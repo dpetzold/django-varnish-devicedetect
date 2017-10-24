@@ -2,9 +2,11 @@
 from setuptools import setup
 
 
-description = ("A django package that allows easy identification of visitors' "
-               "browser, operating system and device information (mobile "
-               "phone, tablet or has touch capabilities).")
+description = """\
+A django package that allows easy identification of visitors'
+browser, operating system and device information (mobile
+phone, tablet or has touch capabilities).
+"""
 
 setup(
     name='django-varnish-devicedetect',
@@ -15,7 +17,7 @@ setup(
     url='https://github.com/dpetzold/django-varnish-devicedetect',
     license='MIT',
     description=description,
-    long_description=open('README.rst').read(),
+    # long_description=open('README.rst').read(),
     zip_safe=False,
     include_package_data=True,
     package_data={'': ['README.rst']},
