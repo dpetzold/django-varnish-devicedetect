@@ -1,7 +1,7 @@
 from . models import Device
 
 
-def simple_middleware(get_response):
+def DeviceDetectMiddleware(get_response):
 
     def middleware(request):
 
