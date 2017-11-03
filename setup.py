@@ -10,7 +10,7 @@ phone, tablet or has touch capabilities).
 
 setup(
     name='django-varnish-devicedetect',
-    version='1.0.0',
+    version='0.1.0',
     author='Derrick Petzold',
     author_email='derrick@petzold.io',
     packages=['varnish_devicedetect'],
@@ -22,6 +22,7 @@ setup(
     include_package_data=True,
     package_data={'': ['README.rst']},
     install_requires=['django'],
+    tests_requires=['mock'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

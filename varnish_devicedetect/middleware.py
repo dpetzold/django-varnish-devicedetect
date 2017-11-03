@@ -1,15 +1,11 @@
+from django.utils.deprecation import MiddlewareMixin
 from . models import Device
 
 
-def DeviceDetectMiddleware(get_response):
+class DeviceDetectMiddleware(MiddlewareMixin):
 
-    def middleware(request):
+    def process_request(self, request):
 
         device = Device(request.META.get('X-UA-Device', 'none'))
         if not hasattr(request, 'device'):
             request.device = device
-
-        response = get_response(request)
-        return response
-
-    return middleware
