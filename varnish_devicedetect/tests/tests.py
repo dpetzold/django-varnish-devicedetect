@@ -4,6 +4,7 @@ from django.test import SimpleTestCase
 
 from varnish_devicedetect.models import Device
 from varnish_devicedetect.middleware import DeviceDetectMiddleware
+from varnish_devicedetect.settings import HTTP_HEADER
 
 
 class MiddlewareTest(SimpleTestCase):
@@ -13,17 +14,17 @@ class MiddlewareTest(SimpleTestCase):
         self.request = Mock(spec='META')
         self.request.META = {}
 
-    def test_middleware_assigns_device(self):
+    def test_middleware_device_pc(self):
 
-        self.request.META['X-UA-Device'] = 'pc'
+        self.request.META[HTTP_HEADER] = 'pc'
         self.assertEqual(self.ddm.process_request(self.request), None)
         self.assertIsInstance(self.request.device, Device)
         self.assertEqual(str(self.request.device), 'pc')
         self.assertTrue(self.request.device.is_pc)
 
-    def test_middleware_assigns_device_mobile(self):
+    def test_middleware_device_mobile(self):
 
-        self.request.META['X-UA-Device'] = 'mobile-android'
+        self.request.META[HTTP_HEADER] = 'mobile-android'
         self.assertEqual(self.ddm.process_request(self.request), None)
         self.assertEqual(str(self.request.device), 'mobile-android')
         self.assertFalse(self.request.device.noattr)
@@ -32,9 +33,9 @@ class MiddlewareTest(SimpleTestCase):
         self.assertTrue(self.request.device.is_mobile)
         self.assertTrue(self.request.device.is_android)
 
-    def test_middleware_assigns_device_tablet(self):
+    def test_middleware_device_tablet(self):
 
-        self.request.META['X-UA-Device'] = 'tablet-android'
+        self.request.META[HTTP_HEADER] = 'tablet-android'
         self.assertEqual(self.ddm.process_request(self.request), None)
         self.assertEqual(str(self.request.device), 'tablet-android')
         self.assertFalse(self.request.device.noattr)
